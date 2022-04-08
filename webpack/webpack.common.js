@@ -45,7 +45,7 @@ module.exports = {
       path: "./public/resources/bookmarklet/index.js",
       filename: "../resources/bookmarklet/index.json",
       data: {
-        env: process.env.NODE_ENV,
+        env: process.env.NODE_ENV, //'production'?
       },
       options: {
         replacer: function (key, value) {

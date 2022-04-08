@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Button from '@mui/material/Button';
-import { css } from '@emotion/react'
+import { getConfig, setConfig } from "./config";
 
 const Options = () => {
   const [color, setColor] = useState<string>("");
@@ -11,11 +11,7 @@ const Options = () => {
   useEffect(() => {
     // Restores select box and checkbox state using the preferences
     // stored in chrome.storage.
-    chrome.storage.sync.get(
-      {
-        favoriteColor: "red",
-        likesColor: true,
-      },
+    getConfig(
       (items) => {
         setColor(items.favoriteColor);
         setLike(items.likesColor);
@@ -25,7 +21,7 @@ const Options = () => {
 
   const saveOptions = () => {
     // Saves options to chrome.storage.sync.
-    chrome.storage.sync.set(
+    setConfig(
       {
         favoriteColor: color,
         likesColor: like,

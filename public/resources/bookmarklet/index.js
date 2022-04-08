@@ -188,5 +188,11 @@ const bookmarkLet = {
       };
     }
   },
+};
 
+module.exports = (configs = {}) => {
+  if (configs.env && configs.env === "production") {
+  }
+
+  return { bookmarkLet };
 };

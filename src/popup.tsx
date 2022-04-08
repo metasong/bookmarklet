@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-
+import Button from '@mui/material/Button';
 const Popup = () => {
   const [count, setCount] = useState(0);
   const [currentURL, setCurrentURL] = useState<string>();
@@ -38,13 +38,13 @@ const Popup = () => {
         <li>Current URL: {currentURL}</li>
         <li>Current Time: {new Date().toLocaleTimeString()}</li>
       </ul>
-      <button
+      <Button
         onClick={() => setCount(count + 1)}
         style={{ marginRight: "5px" }}
       >
         count up
-      </button>
-      <button onClick={changeBackground}>change background</button>
+      </Button>
+      <Button onClick={changeBackground}>change background</Button>
     </>
   );
 };

@@ -8,7 +8,9 @@
         "rootDir": "src",
         "outDir": "dist/js",
         "noEmitOnError": true,
-        "jsx": "react",
+        // "jsx": "react",
+        "jsx": "react-jsx",
+        "jsxImportSource": "@emotion/react",
         "typeRoots": [ "node_modules/@types" ]
     }
 }

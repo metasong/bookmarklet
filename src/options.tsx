@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
+import Button from '@mui/material/Button';
+import { css } from '@emotion/react'
 
 const Options = () => {
   const [color, setColor] = useState<string>("");
@@ -63,7 +65,7 @@ const Options = () => {
         </label>
       </div>
       <div>{status}</div>
-      <button onClick={saveOptions}>Save</button>
+      <Button onClick={saveOptions}>Save</Button>
     </>
   );
 };

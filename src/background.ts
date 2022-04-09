@@ -5,7 +5,3 @@ function polling() {
 }
 
 polling();
-const bookmarkLetUrl = chrome.runtime.getURL('resources/bookmarklet/index.json');
-(async ()=>{
-const a = await import(bookmarkLetUrl);
-})();

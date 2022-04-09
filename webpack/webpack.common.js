@@ -48,13 +48,8 @@ module.exports = {
         env: process.env.NODE_ENV, //'production'?
       },
       options: {
-        replacer: function (key, value) {
-          if (typeof value === "function") {
-            return `javascript:(${value})()`;
-          } else {
-            return value;
-          }
-        },
+        replacer: (key, value) =>
+          typeof value === "function" ? `javascript:(${value})()` : value,
       },
     }),
   ],

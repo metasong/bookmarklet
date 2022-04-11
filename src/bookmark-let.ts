@@ -2,14 +2,15 @@ import { Config, configDefault, getConfig } from "./config"
 import { bookmarkBarId } from "./const"
 
 export class BookmarkLet {
+
   constructor() {
 
   }
 
-  async remove() {
-    const config = await getConfig({bookmarkFolder:configDefault.bookmarkFolder}) as Config;
+  async remove(folder?: string) {
+    // const config = await getConfig({ bookmarkFolder: configDefault.bookmarkFolder }) as Config;
     let bookmarkFolder = (await chrome.bookmarks.getChildren(bookmarkBarId)).filter(
-      child => child.title === config.bookmarkFolder
+      child => child.title === folder
     )[0];
 
     if (bookmarkFolder) {
@@ -18,13 +19,15 @@ export class BookmarkLet {
 
   }
 
-  async add() {
-    const config = await getConfig({bookmarkFolder:configDefault.bookmarkFolder}) as Config;
+  async add(folder: string, url?: string) {
+    // const config = await getConfig({ bookmarkFolder: configDefault.bookmarkFolder }) as Config;
 
-    const bookmarkFolder = await chrome.bookmarks.create({ parentId: bookmarkBarId, index: 0, title: config.bookmarkFolder })
+    const bookmarkFolder = await chrome.bookmarks.create({ parentId: bookmarkBarId, index: 0, title: folder })
 
-    const bookmarkLetUrl = chrome.runtime.getURL('resources/bookmarklet/index.json')
+    const bookmarkLetUrl = url ?? chrome.runtime.getURL('resources/bookmarklet/index.json')
     let resp = await fetch(bookmarkLetUrl);
+    if(!resp.ok) throw new Error('can not load the file. is the url right?');
+
     let { bookmarkLet } = await resp.json();
     // console.log(bookmarkLet);
     for (const [key, value] of Object.entries(bookmarkLet as Record<string, string>)) {
@@ -33,8 +36,8 @@ export class BookmarkLet {
     }
   }
 
-  async update()
-{
-  await this.remove();
-  await this.add();
-}}
+  async update(oldFolder: string|undefined, folder:string, url?: string) {
+    await this.remove(oldFolder);
+    await this.add(folder,url);
+  }
+}

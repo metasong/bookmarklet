@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Button from '@mui/material/Button';
 import { getConfig, setConfig } from "./config";
+import { BookmarkLet } from "./bookmark-let";
 
 const Options = () => {
   const [color, setColor] = useState<string>("");
   const [status, setStatus] = useState<string>("");
   const [like, setLike] = useState<boolean>(false);
+  const bookmarkLet = new BookmarkLet();
 
   useEffect(() => {
     // Restores select box and checkbox state using the preferences

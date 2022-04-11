@@ -1,8 +1,11 @@
+import { remoteUrlDefault } from "./const";
+
 export const configDefault =
 {
   favoriteColor: "red",
   likesColor: true,
-  bookmarkFolder: 'MagicWand'
+  bookmarkFolder: 'MagicWand',
+  remoteUrl: remoteUrlDefault
 }
 
 export type Config = Partial<typeof configDefault>;

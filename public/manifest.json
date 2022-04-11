@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
 
-  "name": "Chrome Extension TypeScript Starter",
-  "description": "Chrome Extension, TypeScript, Visual Studio Code",
+  "name": "Magic Wand",
+  "description": "Utilities in MagicWand of the bookmarks bar",
   "version": "1.0",
 
   "options_ui": {

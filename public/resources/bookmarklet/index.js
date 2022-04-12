@@ -191,6 +191,6 @@ const bookmarkLet = {
 };
 
 const obj = { bookmarkLet };
-
-// JSON.stringify(obj, (key, value) =>typeof value === "function" ? `javascript:(${value})()` : value); 
-module.exports = data => obj;
+const str = () => JSON.stringify(obj, (key, value) =>typeof value === "function" ? `javascript:(${value})()` : value)
+var module;
+module ? module.exports = data => obj: str();

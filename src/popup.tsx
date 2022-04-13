@@ -6,8 +6,10 @@ import { BookmarkLet } from "./bookmark-let";
 import { Box, TextField } from "@mui/material";
 import { Config, configDefault, getConfig, setConfig } from "./config";
 import { remoteUrlDefault } from "./const";
+import { Eval } from "./eval";
 
 const Popup = () => {
+  console.log("Popup.render");
   const [count, setCount] = useState(0);
   const [bookmarkFolder, setBookmarkFolder] = useState<string>("");
   const [remoteUrl, setRemoteUrl] = useState<string>("");
@@ -31,7 +33,7 @@ const Popup = () => {
     getConfig((items: Config) => {
       setRemoteUrl(items.remoteUrl ?? remoteUrlDefault);
       setBookmarkFolder(items.bookmarkFolder ?? configDefault.bookmarkFolder);
-    });
+    })
   }, []);
 
   const update = async () => {

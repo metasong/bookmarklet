@@ -24,7 +24,9 @@
   "background": {
     "service_worker": "js/background.js"
   },
-
+  "sandbox": {
+    "pages": ["sandbox.html"]
+  },
   "permissions": [
     "storage",
     "bookmarks"

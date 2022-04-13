@@ -1,5 +1,5 @@
 import { bookmarkBarId } from "./const"
-import { SandboxEval } from "./sandbox-eval";
+import { SandboxEval } from "./lib/sandbox-eval";
 // put it out out of the class, otherwise it will be created every time (3 times) with the popup.tsx
 const sandboxEval = new SandboxEval();
 

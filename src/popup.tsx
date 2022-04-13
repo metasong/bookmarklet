@@ -47,9 +47,9 @@ const Popup = () => {
       console.log(error.message);
       setHasError(true);
       setHelperText(error.message);
-
       return;
     }
+    
     setConfig({ remoteUrl, bookmarkFolder });
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       const tab = tabs[0];

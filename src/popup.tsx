@@ -81,7 +81,7 @@ export const Popup = () => {
         style={{ minWidth: "600px" }}
         value={bookmarkFolder}
         onChange={(v) => setBookmarkFolder(v.target.value)}
-        label="Bookmarklet Folder on Bookmarks Bar"
+        label="Wandlets Folder on Bookmarks(Favorites) Bar"
       />
       <TextField
         error={hasError}
@@ -90,7 +90,7 @@ export const Popup = () => {
         style={{ minWidth: "600px" }}
         defaultValue={remoteUrl}
         multiline
-        label="Bookmarklet Remote Url"
+        label="Wandlets Url"
       />
       <Button onClick={update}>Update</Button>
     </Box>

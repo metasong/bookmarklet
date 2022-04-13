@@ -37,10 +37,10 @@ const Popup = () => {
   const update = async () => {
     const remoteUrl = urlRef.current!.value;
     try {
-      const { bookmarkFolder } = await getConfig({
+      const { bookmarkFolder: bookmarkFolderOriginal } = await getConfig({
         bookmarkFolder: bookmarkFolderDefault,
       });
-      await bookmarkLet.update(bookmarkFolder, bookmarkFolder, remoteUrl);
+      await bookmarkLet.update(bookmarkFolderOriginal, bookmarkFolder, remoteUrl);
       setHasError(false);
       setHelperText("");
     } catch (error: any) {

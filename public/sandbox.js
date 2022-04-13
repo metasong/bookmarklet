@@ -5,7 +5,7 @@ window.addEventListener("message", function (event) {
     this.clearTimeout(heartbeatHandle);
     heartbeatHandle = setTimeout(() => {
      window.close();
-    }, 300);
+    }, 500);
   } else if (event.data.code) {
     console.log("code received", event.data.code);
     const obj = eval(event.data.code);

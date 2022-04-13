@@ -5,18 +5,16 @@ import { css } from "@emotion/react";
 import { BookmarkLet } from "./bookmark-let";
 import { Box, TextField } from "@mui/material";
 import { Config, configDefault, getConfig, setConfig } from "./config";
-import { remoteUrlDefault } from "./const";
-import { Eval } from "./eval";
+import { bookmarkFolderDefault, remoteUrlDefault } from "./const";
 
 const Popup = () => {
-  console.log("Popup.render");
+  // console.log("Popup.render");// why 3 times?
   const [count, setCount] = useState(0);
   const [bookmarkFolder, setBookmarkFolder] = useState<string>("");
   const [remoteUrl, setRemoteUrl] = useState<string>("");
   const [helperText, setHelperText] = useState<string>("");
   const bookmarkLet = new BookmarkLet();
   const urlRef = React.createRef<HTMLInputElement>();
-  const folderRef = React.createRef<HTMLInputElement>();
   const [hasError, setHasError] = useState<boolean>(false);
 
   useEffect(() => {
@@ -33,17 +31,19 @@ const Popup = () => {
     getConfig((items: Config) => {
       setRemoteUrl(items.remoteUrl ?? remoteUrlDefault);
       setBookmarkFolder(items.bookmarkFolder ?? configDefault.bookmarkFolder);
-    })
+    });
   }, []);
 
   const update = async () => {
     const remoteUrl = urlRef.current!.value;
-    const newFolder = folderRef.current!.value;
     try {
-      await bookmarkLet.update(bookmarkFolder, newFolder, remoteUrl);
+      const { bookmarkFolder } = await getConfig({
+        bookmarkFolder: bookmarkFolderDefault,
+      });
+      await bookmarkLet.update(bookmarkFolder, bookmarkFolder, remoteUrl);
       setHasError(false);
       setHelperText("");
-    } catch (error:any) {
+    } catch (error: any) {
       console.log(error.message);
       setHasError(true);
       setHelperText(error.message);
@@ -87,7 +87,6 @@ const Popup = () => {
         count up
       </Button> */}
       <TextField
-        inputRef={folderRef}
         style={{ minWidth: "600px" }}
         value={bookmarkFolder}
         onChange={(v) => setBookmarkFolder(v.target.value)}

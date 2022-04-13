@@ -1,10 +1,10 @@
-import { remoteUrlDefault } from "./const";
+import { bookmarkFolderDefault, remoteUrlDefault } from "./const";
 
 export const configDefault =
 {
   favoriteColor: "red",
   likesColor: true,
-  bookmarkFolder: 'MagicWand',
+  bookmarkFolder: bookmarkFolderDefault,
   remoteUrl: remoteUrlDefault
 }
 

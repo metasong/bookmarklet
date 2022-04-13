@@ -7,9 +7,8 @@ import { Box, TextField } from "@mui/material";
 import { Config, configDefault, getConfig, setConfig } from "./config";
 import { bookmarkFolderDefault, remoteUrlDefault } from "./const";
 
-const Popup = () => {
+export const Popup = () => {
   // console.log("Popup.render");// why 3 times?
-  const [count, setCount] = useState(0);
   const [bookmarkFolder, setBookmarkFolder] = useState<string>("");
   const [remoteUrl, setRemoteUrl] = useState<string>("");
   const [helperText, setHelperText] = useState<string>("");
@@ -17,15 +16,9 @@ const Popup = () => {
   const urlRef = React.createRef<HTMLInputElement>();
   const [hasError, setHasError] = useState<boolean>(false);
 
-  useEffect(() => {
-    chrome.action.setBadgeText({ text: count.toString() });
-  }, [count]);
-
   // useEffect(() => {
-  //   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  //     setRemoteURL(tabs[0].url);
-  //   });
-  // }, []);
+  //   chrome.action.setBadgeText({ text: count.toString() });
+  // }, [count]);
 
   useEffect(() => {
     getConfig((items: Config) => {
@@ -49,22 +42,25 @@ const Popup = () => {
       setHelperText(error.message);
       return;
     }
-    
-    setConfig({ remoteUrl, bookmarkFolder });
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      const tab = tabs[0];
-      if (tab.id) {
-        chrome.tabs.sendMessage(
-          tab.id,
-          {
-            color: "#555555",
-          },
-          (msg) => {
-            console.log("result message:", msg);
-          }
-        );
-      }
-    });
+
+    await setConfig({ remoteUrl, bookmarkFolder });
+
+    // communicate with content script
+    // chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    //   const tab = tabs[0];
+    //   if (tab.id) {
+    //     chrome.tabs.sendMessage(
+    //       tab.id,
+    //       {
+    //         color: "#555555",
+    //       },
+    //       (msg) => {
+    //         console.log("result message:", msg);
+    //       }
+    //     );
+    //   }
+    // });
+
   };
 
   return (
@@ -76,16 +72,6 @@ const Popup = () => {
       noValidate
       autoComplete="off"
     >
-      {/* <ul style={{ minWidth: "700px" }}>
-        <li>Current URL: {currentURL}</li>
-        <li>Current Time: {new Date().toLocaleTimeString()}</li>
-      </ul>
-      <Button
-        onClick={() => setCount(count + 1)}
-        style={{ marginRight: "5px" }}
-      >
-        count up
-      </Button> */}
       <TextField
         style={{ minWidth: "600px" }}
         value={bookmarkFolder}

@@ -25,11 +25,6 @@ export class SandboxEval {
       }
     });
 
-    let i = 1;
-    setInterval(() => {
-      this.sandbox!.contentWindow!.postMessage({heartbeat: i++}, "*");
-    }, 50);
-
   }
 
   evalAsync(code: string, context?: any): Promise<any> {

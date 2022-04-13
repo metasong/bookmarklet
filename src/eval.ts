@@ -29,9 +29,7 @@ export class Eval {
 
   }
 
-
   evalAsync(code: string, context?: any): Promise<any> {
-
     return new Promise((resolve, reject) => {
       try {
         this.sandbox!.contentWindow!.postMessage({code}, "*");

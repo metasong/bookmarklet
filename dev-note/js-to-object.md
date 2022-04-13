@@ -19,6 +19,7 @@
   ],
   ```
   ```js
+    const bookmarkLetUrl = url ?? chrome.runtime.getURL('resources/bookmarklet/index.json')
     let resp = await fetch(bookmarkLetUrl);
     if (!resp.ok) throw new Error('can not load the file. is the url right?');
     let { bookmarkLet } = await resp.json();

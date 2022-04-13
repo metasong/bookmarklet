@@ -2,7 +2,6 @@ const webpack = require("webpack");
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const srcDir = path.join(__dirname, "..", "src");
-const GenerateJsonFromJsPlugin = require("./js2json");
 
 module.exports = {
   entry: {
@@ -40,17 +39,6 @@ module.exports = {
     new CopyPlugin({
       patterns: [{ from: ".", to: "../", context: "public" }],
       options: {},
-    }),
-    new GenerateJsonFromJsPlugin({
-      path: "./public/resources/bookmarklet/index.js",
-      filename: "../resources/bookmarklet/index.json",
-      data: {
-        env: process.env.NODE_ENV, //'production'?
-      },
-      options: {
-        replacer: (key, value) =>
-          typeof value === "function" ? `javascript:(${value})()` : value,
-      },
     }),
   ],
 };

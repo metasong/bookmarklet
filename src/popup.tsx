@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Button from "@mui/material/Button";
 import { css } from "@emotion/react";
-import { BookmarkLet } from "./bookmark-let";
+import { BookmarkLet } from "./lib/bookmark-let";
 import { Box, TextField } from "@mui/material";
-import { Config, configDefault, getConfig, setConfig } from "./config";
-import { bookmarkFolderDefault, remoteUrlDefault } from "./const";
+import { Config, configDefault, getConfig, setConfig } from "./lib/config";
+import { bookmarkFolderDefault, remoteUrlDefault } from "./lib/const";
 
 export const Popup = () => {
   // console.log("Popup.render");// why 3 times?

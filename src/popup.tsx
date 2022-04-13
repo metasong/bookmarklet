@@ -69,6 +69,11 @@ export const Popup = () => {
       sx={{
         "& .MuiTextField-root": { m: 1, width: "25ch" },
       }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+      }}
       noValidate
       autoComplete="off"
     >

@@ -8,3 +8,16 @@
 //     sendResponse("Color message is none.");
 //   }
 // });
+
+var port = chrome.runtime.connect({name: "wand"});
+// port.postMessage({joke: "Knock knock"});
+port.onMessage.addListener(function(msg) {
+  // console.log("Receive msg = ", msg);
+  if(msg.code) {
+    document.documentElement.setAttribute('onreset', decodeURI(msg.code));
+    document.documentElement.dispatchEvent(new CustomEvent('reset'));
+    document.documentElement.removeAttribute('onreset');
+  }
+});
+
+

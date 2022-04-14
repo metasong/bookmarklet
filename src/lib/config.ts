@@ -1,10 +1,10 @@
-import { bookmarkFolderDefault, remoteUrlDefault } from "./const";
+import { wandletFolderDefault, remoteUrlDefault } from "./const";
 
 export const configDefault =
 {
   favoriteColor: "red",
   likesColor: true,
-  bookmarkFolder: bookmarkFolderDefault,
+  bookmarkFolder: wandletFolderDefault,
   remoteUrl: remoteUrlDefault
 }
 

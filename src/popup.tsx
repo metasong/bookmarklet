@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Button from "@mui/material/Button";
 import { css } from "@emotion/react";
-import { BookmarkLet } from "./lib/bookmark-let";
+import { WandletManager } from "./lib/wandlet-manager";
 import { Box, TextField } from "@mui/material";
 import { Config, configDefault, getConfig, setConfig } from "./lib/config";
-import { bookmarkFolderDefault, remoteUrlDefault } from "./lib/const";
+import { wandletFolderDefault, remoteUrlDefault } from "./lib/const";
 
 export const Popup = () => {
   // console.log("Popup.render");// why 3 times?
   const [bookmarkFolder, setBookmarkFolder] = useState<string>("");
   const [remoteUrl, setRemoteUrl] = useState<string>("");
   const [helperText, setHelperText] = useState<string>("");
-  const bookmarkLet = new BookmarkLet();
+  const bookmarkLet = new WandletManager();
   const urlRef = React.createRef<HTMLInputElement>();
   const [hasError, setHasError] = useState<boolean>(false);
 
@@ -31,7 +31,7 @@ export const Popup = () => {
     const remoteUrl = urlRef.current!.value;
     try {
       const { bookmarkFolder: bookmarkFolderOriginal } = await getConfig({
-        bookmarkFolder: bookmarkFolderDefault,
+        bookmarkFolder: wandletFolderDefault,
       });
       await bookmarkLet.update(bookmarkFolderOriginal, bookmarkFolder, remoteUrl);
       setHasError(false);

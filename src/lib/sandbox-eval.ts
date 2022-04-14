@@ -12,8 +12,6 @@ export class SandboxEval {
     this.sandbox.setAttribute('src', 'sandbox.html');
     document.body.appendChild(this.sandbox);
 
-    this.evalAsync = this.evalAsync.bind(this);
-
     // receive message from sandbox.js
     window.addEventListener('message', event => {
       if (event.source === this.sandbox.contentWindow) {
@@ -27,7 +25,7 @@ export class SandboxEval {
 
   }
 
-  evalAsync(code: string, context?: any): Promise<any> {
+  evalAsync = (code: string, context?: any): Promise<any> => {
     return new Promise((resolve, reject) => {
       try {
         this.sandbox!.contentWindow!.postMessage({code}, "*");

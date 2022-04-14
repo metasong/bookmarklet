@@ -42,7 +42,8 @@ export class Omnibox {
       return;
     }
     const resultFromValue: chrome.omnibox.SuggestResult[] = [];
-    for (const [key, value] of entries) {
+    for (let [key, value] of entries) {
+      value =  decodeURI(value);
       if (key.match(new RegExp(text,'i'))) {
         result.push({
           content: `${key}@@${value}`,
@@ -108,7 +109,7 @@ export class Omnibox {
       //   args: [url]
       // });
       console.log('executeScript', url);
-      this.port?.postMessage({code: decodeURI(url)});
+      this.port?.postMessage({code:url});
       return;
     }
 

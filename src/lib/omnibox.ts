@@ -108,7 +108,7 @@ export class Omnibox {
       //   args: [url]
       // });
       console.log('executeScript', url);
-      this.port?.postMessage({code: url});
+      this.port?.postMessage({code: decodeURI(url)});
       return;
     }
 

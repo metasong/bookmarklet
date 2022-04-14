@@ -15,7 +15,7 @@ port.onMessage.addListener(function(msg) {
   // console.log("Receive msg = ", msg);
   if(msg.code) {
     // https://stackoverflow.com/questions/9515704/use-a-content-script-to-access-the-page-context-variables-and-functions/9517879#answer-9517879
-    document.documentElement.setAttribute('onreset', decodeURI(msg.code));
+    document.documentElement.setAttribute('onreset', msg.code);
     document.documentElement.dispatchEvent(new CustomEvent('reset'));
     document.documentElement.removeAttribute('onreset');
   }

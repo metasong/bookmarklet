@@ -11,7 +11,7 @@
 
 var port = chrome.runtime.connect({ name: "wand" });
 // port.postMessage({joke: "Knock knock"});
-port.onMessage.addListener(function (msg) {
+port.onMessage.addListener(async (msg) => {
   // console.log("Receive msg = ", msg);
   if (msg.code) {
     // https://developer.chrome.com/docs/extensions/mv3/mv2-sunset/
@@ -19,29 +19,37 @@ port.onMessage.addListener(function (msg) {
     // https://github.com/Tampermonkey/tampermonkey/issues/644
     // https://github.com/violentmonkey/violentmonkey/issues/505
     // https://stackoverflow.com/questions/9515704/use-a-content-script-to-access-the-page-context-variables-and-functions/9517879#answer-9517879
-    // problem: scripts are accumulated! seems remove attribute is not working
+    // problem: scripts are accumulated! seems remove attribute is not working, also may be blocked by security config on page, i.e. google page
     // const eventName = "onreset";
     // document.documentElement.setAttribute(eventName, msg.code);
     // document.documentElement.dispatchEvent(new CustomEvent("reset"));
     // document.documentElement.removeAttribute(eventName);
-    window.addEventListener(
-      "focus",
-      () => {
-        if (msg.code) {
-          navigator.clipboard.writeText(msg.code).then(
-            function () {
-              console.log("Copied code to clipboard");
-            },
-            function (err) {
-              console.error("Could not copy code to clipboard");
-            }
-          );
-        }
-      },
-      { once: true }
-    );
 
-    // not working
+
+    /// focus not work, so not work, user have to click the document to focus.
+    function copyClipboard(code: string) {
+      return new Promise((resolve, reject) => {
+        const _asyncCopyFn = async () => {
+          try {
+            const value = await navigator.clipboard.writeText(code);
+            console.log(`${value} is write!`);
+            resolve(value);
+          } catch (e) {
+            reject(e);
+          }
+          window.removeEventListener("focus", _asyncCopyFn);
+        };
+
+        window.addEventListener("focus", _asyncCopyFn);
+        console.log(
+          "Hit <Tab> to give focus back to document (or we will face a DOMException);"
+        );
+      });
+    }
+    // document.documentElement.dispatchEvent(new CustomEvent("focus"));//not work
+    await copyClipboard(msg.code);
+
+    // not working, security of v3
     // var script = document.createElement("script");
     // script.textContent = msg.code;
     // (document.head || document.documentElement).appendChild(script);

@@ -1,71 +1,11 @@
-# Chrome Extension TypeScript Starter
+## Goal
+with time going I create a bunch of javascript bookmarklets, they are convenient for me, but hard to maintain: to modify a bookmark let, I have to the js string out from bookmark manager's url, some time the space and other chars are encoded into 20%, 22%..., I have to modify and beautify the bookmarklet script, and then edit. This is not the editing experience I want. Further more, it's easy to lost all your bookmarklets, when you forgot backup, and the default bookmark manager could not just backup just a specific folder, it would backup all your bookmarks. And it's also hard to sync your bookmark between different browsers.
 
-![build](https://github.com/chibat/chrome-extension-typescript-starter/workflows/build/badge.svg)
+So I created a bookmarklet manager named magicWand. It can import your bookmarklets from a remote git javascript file.
+the default gist javascript file is: 
+https://gist.githubusercontent.com/metasong/d87d2cc67c33039288c60d5c675165eb/raw/b4f2c360802a181fbf7e816c52d3dbb5bb10cbf6/index.js
 
-Chrome Extension, TypeScript and Visual Studio Code
+you could fork from it and create your own.
 
-## Prerequisites
-
-* [node + npm](https://nodejs.org/) (Current Version)
-
-## Option
-
-* [Visual Studio Code](https://code.visualstudio.com/)
-
-## Includes the following
-
-* TypeScript
-* Webpack
-* React
-* Jest
-* Example Code
-    * Chrome Storage
-    * Options Version 2
-    * content script
-    * count up badge number
-    * background
-
-## Project Structure
-
-* src/typescript: TypeScript source files
-* src/assets: static files
-* dist: Chrome Extension directory
-* dist/js: Generated JavaScript files
-
-## Setup
-
-```
-npm install
-```
-
-## Import as Visual Studio Code project
-
-...
-
-## Build
-
-```
-
-npm run build
-```
-
-## Build in watch mode
-
-### terminal
-
-```
-npm run watch
-```
-
-### Visual Studio Code
-
-Run watch mode.
-
-type `Ctrl + Shift + B`
-
-## Load extension to chrome
-
-Load `dist` directory
-
-## Test
-`npx jest` or `npm run test`
+![](./doc/img/magicWand-popup.png)
+![](./doc/img/magicWand-default-bookmarkLets.png)

@@ -7,5 +7,6 @@ https://gist.githubusercontent.com/metasong/d87d2cc67c33039288c60d5c675165eb/raw
 
 you could fork from it and create your own.
 
+## the UI
 ![](./doc/img/magicWand-popup.png)
 ![](./doc/img/magicWand-default-bookmarkLets.png)

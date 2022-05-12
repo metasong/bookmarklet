@@ -3,8 +3,7 @@ import { Omnibox } from "./lib/omnibox";
 //https://developer.chrome.com/docs/extensions/mv3/service_workers/
 function polling() {
   console.log("polling");
-  
-  // setTimeout(polling, 1000 * 30);
+  setTimeout(polling, 1000 * 30);
 }
 const omnibox = new Omnibox();
 
@@ -27,4 +26,4 @@ chrome.runtime.onConnect.addListener(function(port) {
 
 });
 
-polling();
+// polling();
